@@ -12,8 +12,8 @@ node {
     
     stage 'Setup'
     sh "echo '{\n\t\"insecure-registries\" : [ \"registry.marathon.l4lb.thisdcos.directory:5000\" ]\n}' > /etc/docker/daemon.json"
-    sh "systemctl daemon-reload"
-    sh "systemctl restart docker"
+    sh "service daemon-reload restart"
+    sh "service docker restart"
 
     // Build Docker image
     stage 'Build'

@@ -9,10 +9,6 @@ node {
     // Checkout source code from Git
     stage 'Checkout'
     checkout scm
-    
-    stage 'Setup'
-    sh "echo '{\n\t\"insecure-registries\" : [ \"registry.marathon.l4lb.thisdcos.directory:5000\" ]\n}' > /etc/docker/daemon.json"
-    sh "/etc/init.d/dockerd restart"
 
     // Build Docker image
     stage 'Build'
@@ -20,7 +16,9 @@ node {
 
     // Log in and push image to registry
     stage 'Publish'
-    sh "docker push registry.marathon.l4lb.thisdcos.directory:5000/summit1:${gitCommit()}"
+    withEnv(['DOCKER_DAEMON_ARGS="--insecure-registry=registry.marathon.l4lb.thisdcos.directory"']) {
+        sh "docker push registry.marathon.l4lb.thisdcos.directory:5000/summit1:${gitCommit()}"
+    }
 
     // Test links in file
     stage 'Test'

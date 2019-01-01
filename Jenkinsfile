@@ -9,6 +9,9 @@ node {
     // Checkout source code from Git
     stage 'Checkout'
     checkout scm
+    
+    stage 'Setup'
+    sh "rc-service --list"
 
     // Build Docker image
     stage 'Build'

@@ -11,8 +11,9 @@ node {
     checkout scm
     
     stage 'Setup'
-    sh "apk add openrc --no-cache"
-    sh "dockerd"
+    sh "killall dockerd"
+    sh "dockerd --insecure-registry registry.marathon.l4lb.thisdcos.directory &"
+    sh "sleep 15"
 
     // Build Docker image
     stage 'Build'

@@ -10,10 +10,12 @@ node {
     stage 'Checkout'
     checkout scm
     
-    // stage 'Setup'
-    // sh "echo '{\n\t\"insecure-registries\" : [ \"registry.marathon.l4lb.thisdcos.directory:5000\" ]\n}' > /etc/docker/daemon.json"
-    // sh "service daemon-reload restart"
-    // sh "service docker restart"
+    stage 'Setup'
+    sh "echo '{\n\t\"insecure-registries\" : [ \"registry.marathon.l4lb.thisdcos.directory:5000\" ]\n}' > /etc/docker/daemon.json"
+    sh "service"
+    sh "systemctl"
+    sh "service daemon-reload restart"
+    sh "service docker restart"
 
     // Build Docker image
     stage 'Build'
@@ -21,7 +23,7 @@ node {
 
     // Log in and push image to registry
     stage 'Publish'
-    sh "docker push registry.marathon.l4lb.thisdcos.directory:5000/summit1:${gitCommit()} --insecure-registry=registry.marathon.l4lb.thisdcos.directory"
+    sh "docker push registry.marathon.l4lb.thisdcos.directory:5000/summit1:${gitCommit()}"
 
     // Test links in file
     stage 'Test'

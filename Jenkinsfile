@@ -11,6 +11,7 @@ node {
     checkout scm
     
     stage 'Setup'
+    sh "apk add openrc --no-cache"
     sh "rc-service --list"
 
     // Build Docker image

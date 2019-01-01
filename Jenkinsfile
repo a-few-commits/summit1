@@ -9,6 +9,11 @@ node {
     // Checkout source code from Git
     stage 'Checkout'
     checkout scm
+    
+    stage 'Setup Docker'
+    sh "echo '{\n\t\"insecure-registries\" : [ \"registry.marathon.l4lb.thisdcos.directory:5000\" ]\n}' > /etc/docker/daemon.json"
+    sh "systemctl daemon-reload"
+    sh "systemctl restart docker"
 
     // Build Docker image
     stage 'Build'

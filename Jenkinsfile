@@ -14,7 +14,7 @@ node {
     sh "killall dockerd || true"
     sh "sleep 15"
     sh "echo '{\n\t\"insecure-registries\" : [ \"registry.marathon.l4lb.thisdcos.directory:5000\" ]\n}' > /etc/docker/daemon.json"
-    sh "dockerd"
+    sh "dockerd &"
     sh "sleep 15"
 
     // Build Docker image

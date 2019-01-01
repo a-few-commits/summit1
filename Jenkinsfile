@@ -12,7 +12,7 @@ node {
     
     stage 'Setup'
     sh "apk add openrc --no-cache"
-    sh "rc-service --list"
+    sh "dockerd"
 
     // Build Docker image
     stage 'Build'

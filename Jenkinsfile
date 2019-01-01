@@ -12,6 +12,7 @@ node {
     
     stage 'Setup'
     sh "killall dockerd"
+    sh "sleep 15"
     sh "dockerd --insecure-registry registry.marathon.l4lb.thisdcos.directory &"
     sh "sleep 15"
 

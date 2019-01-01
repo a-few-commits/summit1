@@ -11,7 +11,7 @@ node {
     checkout scm
     
     stage 'Setup'
-    sh "killall dockerd"
+    sh "killall dockerd || true"
     sh "sleep 15"
     sh "dockerd --insecure-registry registry.marathon.l4lb.thisdcos.directory &"
     sh "sleep 15"
